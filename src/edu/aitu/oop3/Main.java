@@ -9,6 +9,7 @@ import edu.aitu.oop3.repositories.StudentRepository;
 import edu.aitu.oop3.repositories.interfaces.ICourseRepository;
 import edu.aitu.oop3.repositories.interfaces.IStudentRepository;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -45,7 +46,14 @@ public class Main {
                 } else if (choice == 3) {
                     System.out.print("Enter name to search: ");
                     String name = scanner.nextLine();
-                    courseRepo.findByName(name).forEach(System.out::println);
+                    List<Course> foundCourses = courseRepo.findByName(name);
+
+                    if (foundCourses.isEmpty()) {
+                        System.out.println("Course not found.");
+                    } else {
+                        foundCourses.forEach(System.out::println);
+                    }
+
                 } else if (choice == 4) {
                     System.out.print("Enter Course ID to delete: ");
                     int id = Integer.parseInt(scanner.nextLine());
@@ -59,7 +67,14 @@ public class Main {
                 } else if (choice == 7) {
                     System.out.print("Enter name to search: ");
                     String name = scanner.nextLine();
-                    studentRepo.findByName(name).forEach(System.out::println);
+                    List<Student> foundStudents = studentRepo.findByName(name);
+
+                    if (foundStudents.isEmpty()) {
+                        System.out.println("Student not found.");
+                    } else {
+                        foundStudents.forEach(System.out::println);
+                    }
+
                 } else if (choice == 8) {
                     System.out.print("Enter Student ID to delete: ");
                     int id = Integer.parseInt(scanner.nextLine());
