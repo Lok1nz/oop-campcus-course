@@ -32,4 +32,11 @@ public class DatabaseConnection {
             throw new RuntimeException("Cannot load DB_PASSWORD from config.properties", e);
         }
     }
+    public class DatabaseConnection implements IDB {
+
+        @Override
+        public Connection getConnection() throws SQLException {
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        }
+    }
 }
