@@ -23,6 +23,7 @@ public class Main {
             }
         }
 
+        // 2. Тестируем поиск по ID
         System.out.println("\n--- Finding Course #1 ---");
         Course course = repo.getById(1);
         if (course != null) {
@@ -30,5 +31,9 @@ public class Main {
         } else {
             System.out.println("Course not found!");
         }
+
+        System.out.println("\n--- Adding New Course ---");
+        Course newCourse = new Course(0, "Advanced Java", "Dr. Alan Turing", 5);
+        repo.create(newCourse);
     }
 }

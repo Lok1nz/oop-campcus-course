@@ -6,4 +6,5 @@ import java.util.List;
 public interface ICourseRepository {
     List<Course> getAll();
     Course getById(int id);
+    void create(Course course);
 }

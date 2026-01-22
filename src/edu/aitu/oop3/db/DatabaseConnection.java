@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DatabaseConnection implements IDB { // 1. Один класс, реализующий интерфейс
+public class DatabaseConnection implements IDB {
     private static final String URL = "jdbc:postgresql://aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=require";
     private static final String USER = "postgres.lfhjtgffimnvwzbqcbxr";
     private static final String PASSWORD = loadPassword();
@@ -16,13 +16,11 @@ public class DatabaseConnection implements IDB { // 1. Один класс, ре
     public DatabaseConnection() {
     }
 
-    // 3. ТОЛЬКО ОДИН метод getConnection с аннотацией @Override
     @Override
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    // 4. Метод загрузки пароля
     private static String loadPassword() {
         Properties props = new Properties();
         try (InputStream input = new FileInputStream("config.properties")) {

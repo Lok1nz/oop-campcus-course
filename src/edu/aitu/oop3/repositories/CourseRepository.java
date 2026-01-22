@@ -61,4 +61,20 @@ public class CourseRepository implements ICourseRepository {
         }
         return null;
     }
+    @Override
+    public void create(Course course) {
+        String sql = "INSERT INTO courses(title, instructor, credits) VALUES(?, ?, ?)";
+        try (Connection conn = db.getConnection();
+             PreparedStatement st = conn.prepareStatement(sql)) {
+
+            st.setString(1, course.getTitle());
+            st.setString(2, course.getInstructor());
+            st.setInt(3, course.getCredits());
+
+            st.executeUpdate();
+            System.out.println("Course added successfully!");
+        } catch (SQLException e) {
+            System.err.println("Error adding course: " + e.getMessage());
+        }
+    }
 }
