@@ -63,13 +63,14 @@ public class CourseRepository implements ICourseRepository {
     }
     @Override
     public void create(Course course) {
-        String sql = "INSERT INTO courses(title, instructor, credits) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO courses(title, instructor, credits, capacity) VALUES(?, ?, ?, ?)";
         try (Connection conn = db.getConnection();
              PreparedStatement st = conn.prepareStatement(sql)) {
 
             st.setString(1, course.getTitle());
             st.setString(2, course.getInstructor());
             st.setInt(3, course.getCredits());
+            st.setInt(4, 50);
 
             st.executeUpdate();
             System.out.println("Course added successfully!");
