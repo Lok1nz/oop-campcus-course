@@ -20,7 +20,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\n--- University System Management ---");
+            System.out.println("\n--- Campus Course Registration System ---");
             System.out.println("1. View all courses");
             System.out.println("2. Add new course");
             System.out.println("3. Search course by name");
