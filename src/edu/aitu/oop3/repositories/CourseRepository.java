@@ -39,6 +39,26 @@ public class CourseRepository implements ICourseRepository {
 
     @Override
     public Course getById(int id) {
+        String sql = "SELECT id, title, instructor, credits FROM courses WHERE id = ?";
+
+        try (Connection conn = db.getConnection();
+             PreparedStatement st = conn.prepareStatement(sql)) {
+
+            st.setInt(1, id);
+
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    return new Course(
+                            rs.getInt("id"),
+                            rs.getString("title"),
+                            rs.getString("instructor"),
+                            rs.getInt("credits")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+        }
         return null;
     }
 }

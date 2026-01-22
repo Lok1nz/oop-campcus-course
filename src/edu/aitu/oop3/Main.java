@@ -1,25 +1,34 @@
 package edu.aitu.oop3;
 
 import edu.aitu.oop3.db.DatabaseConnection;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import edu.aitu.oop3.db.IDB;
+import edu.aitu.oop3.models.Course;
+import edu.aitu.oop3.repositories.CourseRepository;
+import edu.aitu.oop3.repositories.interfaces.ICourseRepository;
+
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Connecting to Supabase...");
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            System.out.println("Connected successfully!");
-            String sql = "SELECT CURRENT_TIMESTAMP";
-            try (PreparedStatement stmt = connection.prepareStatement(sql);
-                 ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    System.out.println("Database time: " + rs.getTimestamp(1));
-                }
+        IDB db = new DatabaseConnection();
+        ICourseRepository repo = new CourseRepository(db);
+
+        System.out.println("--- All Courses ---");
+        List<Course> allCourses = repo.getAll();
+        if (allCourses.isEmpty()) {
+            System.out.println("No courses found in database.");
+        } else {
+            for (Course c : allCourses) {
+                System.out.println(c);
             }
-        } catch (SQLException e) {
-            System.out.println("Error while connecting to database:");
-            e.printStackTrace();
+        }
+
+        System.out.println("\n--- Finding Course #1 ---");
+        Course course = repo.getById(1);
+        if (course != null) {
+            System.out.println("Found: " + course);
+        } else {
+            System.out.println("Course not found!");
         }
     }
 }

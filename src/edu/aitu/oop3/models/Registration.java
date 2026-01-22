@@ -1,3 +1,5 @@
+package edu.aitu.oop3.models;
+import java.sql.Timestamp;
 public class Registration {
     private int id;
     private int studentId;
@@ -11,7 +13,6 @@ public class Registration {
         this.registrationDate = registrationDate;
     }
 
-    // Геттеры
     public int getId() { return id; }
     public int getStudentId() { return studentId; }
     public int getCourseId() { return courseId; }
