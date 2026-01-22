@@ -1,5 +1,7 @@
 package edu.aitu.oop3.models;
+
 import java.sql.Timestamp;
+
 public class Registration {
     private int id;
     private int studentId;
@@ -20,6 +22,6 @@ public class Registration {
 
     @Override
     public String toString() {
-        return "Registration #" + id + ": Student ID " + studentId + " -> Course ID " + courseId;
+        return "Registration #" + id + ": Student ID " + studentId + " -> Course ID " + courseId + " (" + registrationDate + ")";
     }
 }
