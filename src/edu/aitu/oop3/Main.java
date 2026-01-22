@@ -1,3 +1,5 @@
+package edu.aitu.oop3;
+
 import edu.aitu.oop3.db.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
